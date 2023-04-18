@@ -27,14 +27,11 @@ string_leitura2:	.asciz " da lista\n"
 string_leitura_id:	.asciz "ID: "
 string_leitura_str:	.asciz "String: "
 
-buffer:			.space 256
-
 string_percorre:	.asciz "Vamos percorrer a lista em ordem de ligação: \n"
 string_percorre_id:	.asciz "ID: "
 string_percorre_str:	.asciz " | String: "
 
 string_final:		.asciz "Programa executado. Encerrando."
-
 
 	.text
 	.globl main
@@ -102,29 +99,15 @@ while_leitura:
 	ecall
 	#Lendo a string
 	addi a7, zero, SYS_READ_STRING	#a7 = SYS_READ_STRING
-	la a0, buffer
+	#la a0, buffer
+	add a0, zero, t2
 	addi a1, zero, SIZE_STRING_ELEM	#a1 = SIZE_STRING_ELEM
 	ecall				#elemento[t2] = string[0]
-	add t4, a0, a1			#t4 = a0 + a1
-	#Salvando string
-loop_armazenando_string:
-	beq t4, a0, fim_loop_armazenando_string
-	#a0: ponteiro para PERCORRER a string a ser movida para o elemento
-	#t2: ponteiro para PERCORRER o elemento que receberá a string
-	#t3: registrador temporario para receber cada caracter da string
-	#t4: registrador que armazena o fim da string
-	lb t3, (a0)			#t3 = string[a0]
-	sb t3, (t2)			#elemento[t2] = t3
-	addi a0, a0, 1		#a0++
-	addi t2, t2, 1		#t2++
-	j loop_armazenando_string
-fim_loop_armazenando_string:
-	#setar o t2 na positcao do ponteiro
-	addi t2, t1, SIZE_ID_STRING	#t2 = elemento[SIZE_ID_STRING]
 	
 	#Determinando ponteiro nulo
 	addi t3, zero, -1		#t3 = -1
 	#Salvando ponteiro
+	addi t2, t1, SIZE_ID_STRING	#t2 = elemento[SIZE_ID_STRING]
 	sw t3, (t2)			#elemento[t2] = t3
 
 	#Concatenando elementos
@@ -145,6 +128,7 @@ fim_if_concatenando:
 	
 fim_leitura:
 	
+percorre_elementos:
 	#Percorrendo lista ligada
 	add t0, zero, s1		#t0 = s1: copia do ponteiro do início da lista
 	addi t6, zero, -1		#t6 = -1: registrador auxiliar
