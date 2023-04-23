@@ -3,7 +3,7 @@
 ## Autores:
 
 * Tarcídio Antônio Júnior - 10748347
-* Jade -
+* Jade Bortot de Paiva - 11372883
 * Gabriel
 * Vamo -
 
