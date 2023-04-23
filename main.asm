@@ -139,7 +139,7 @@ while_leitura:
 	addi t2, t2, SIZE_ID_ELEM	#t2 += SIZE_ID_ELEM
 		
 	#Leitura da String
-	#Imprimindo texto para o usuário: print("String: ")
+	#Imprimindo texto para o usuário: print("String com 28 caracteres: ")
 	#print(string_leitura_id)
 	addi a7, zero, SYS_PRINT_STRING #a7 = SYS_PRINT_STRING
 	la a0, string_leitura_str	#a0 = endereco(string_leitura_str)
