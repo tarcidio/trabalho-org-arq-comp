@@ -46,6 +46,10 @@
 
 ![image](https://user-images.githubusercontent.com/50781629/233849324-10a63ec7-1d67-4005-b81f-1c7d28221303.png)
 
+### String com mais de 28 caracteres
+
+![image](https://user-images.githubusercontent.com/50781629/233849876-cdaac958-28c7-40b5-8263-965c4e5a83af.png)
+
 ## Desafios
   Via de regra, o trabalho foi a aplicação do que foi muito bem ensinado já em sala de aula. Portanto, os desafios foram pontuais. O primeiro deles foi a utilização da chamada ao sistema para alocação de memória que até então não se tinha usado. O segundo desafio foi separar o código em funções. Este levou mais tempo, pois foi necessário revisitar o código após uma semana e isso fez com que o grupo se esquecesse, mesmo com os devidos comentários, do que cada comando no código fazia. Por fim, o grupo também tentou separar as funções em um arquivo a parte para incluí-lo depois, mas não foi possível, pois o simulador não permite. 
 
