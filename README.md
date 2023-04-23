@@ -21,6 +21,10 @@
 
 ## Testes
 
+### Zero elementos
+
+![image](https://user-images.githubusercontent.com/50781629/233849077-8eeb68aa-4037-4bea-bece-7edbce898b01.png)
+
 ### Um elemento
 
 ![image](https://user-images.githubusercontent.com/50781629/233848818-0ae537c9-fd58-401c-8296-1b89fd1d6e60.png)
@@ -34,6 +38,13 @@
 ![image](https://user-images.githubusercontent.com/50781629/233848904-e6588926-c1b3-4001-82e0-e7560476e22f.png)
 
 ### Dez elementos
+
+![image](https://user-images.githubusercontent.com/50781629/233849037-75caa777-a423-428a-8b56-13dcb1bcb4c8.png)
+![image](https://user-images.githubusercontent.com/50781629/233849051-a803230a-954b-4c29-87f6-d45913f28d0e.png)
+
+##Valor menor que zero
+
+![image](https://user-images.githubusercontent.com/50781629/233849324-10a63ec7-1d67-4005-b81f-1c7d28221303.png)
 
 ## Desafios
   Via de regra, o trabalho foi a aplicação do que foi muito bem ensinado já em sala de aula. Portanto, os desafios foram pontuais. O primeiro deles foi a utilização da chamada ao sistema para alocação de memória que até então não se tinha usado. O segundo desafio foi separar o código em funções. Este levou mais tempo, pois foi necessário revisitar o código após uma semana e isso fez com que o grupo se esquecesse, mesmo com os devidos comentários, do que cada comando no código fazia. Por fim, o grupo também tentou separar as funções em um arquivo a parte para incluí-lo depois, mas não foi possível, pois o simulador não permite. 
