@@ -23,9 +23,15 @@
 
 ### Um elemento
 
+![image](https://user-images.githubusercontent.com/50781629/233848818-0ae537c9-fd58-401c-8296-1b89fd1d6e60.png)
+
 ### Dois elementos
 
+![image](https://user-images.githubusercontent.com/50781629/233848849-f00752e5-2e64-4125-b475-22f5ad61b789.png)
+
 ### Cinco elementos
+
+![image](https://user-images.githubusercontent.com/50781629/233848904-e6588926-c1b3-4001-82e0-e7560476e22f.png)
 
 ### Dez elementos
 
