@@ -117,7 +117,7 @@ if_concatenando:			#Se esse é o primeiro elemento da lista
 	addi t6, zero, -1		#t6 = -1 (apenas como auxiliar)
 	bne s1, t6, else_concatenando	#se s1 == -1
 	add s1, zero, t1		#s1 = t1
-	addi s2, t1, SIZE_ID_STRING	#s2 = elemento[SIZE_ID+STRING]
+	add s2, zero, t2		#s2 = elemento[SIZE_ID+STRING]
 	j fim_if_concatenando
 else_concatenando:			#Se esse não é o primeiro elemento da lista
 	sw t1, (s2)			#elemento[s2] = t1
