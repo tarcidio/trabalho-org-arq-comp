@@ -30,8 +30,7 @@
 ### Dez elementos
 
 ## Desafios
-  Falar sobre a seraração dos arquivos, separacao em funçoes, dias tnetar corrigir e demorou, sqbk que nao sabiamos mas a profssora mencionou em aula
-
+  Via de regra, o trabalho foi a aplicação do que foi muito bem ensinado já em sala de aula. Portanto, os desafios foram pontuais. O primeiro deles foi a utilização da chamada ao sistema para alocação de memória que até então não se tinha usado. O segundo desafio foi separar o código em funções. Este levou mais tempo, pois foi necessário revisitar o código após uma semana e isso fez com que o grupo se esquecesse, mesmo com os devidos comentários, do que cada comando no código fazia. Por fim, o grupo também tentou separar as funções em um arquivo a parte para incluí-lo depois, mas não foi possível, pois o simulador não permite. 
 
 ---
 
