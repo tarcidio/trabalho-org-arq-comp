@@ -2,6 +2,9 @@
 #UNIVERSIDADE DE SÃO PAULO - SÃO CARLOS
 #INSTITUO DE CIÊNCIAS MATEMÁTICAS E DE COMPUTAÇÃO (ICMC)
 #MEMBROS:
+#JADE
+#GABRIEL
+#VAMO
 #TARCÍDIO ANTÔNIO JÚNIOR - 10748347
 
 #Resumo do Programa: implementação, em Assembly RISC-V, de uma lista ligada. Ela armazenará
@@ -16,10 +19,9 @@ SYS:
 			.eqv SYS_SBRK, 9 		#Alocacao na heap da memória
 			.eqv SYS_EXIT, 93
 STRUCT:			.eqv SIZE_ELEM, 36 		#Tamanho da lista será de 36 bytes:
-			.eqv SIZE_ID_ELEM, 4		#4 bytes: ID
-			.eqv SIZE_STRING_ELEM, 28	#28 bytes: string de tamanho fixo
-			.eqv SIZE_ID_STRING, 32
-			.eqv SIZE_POINTER, 4		#4 bytes: valor do endereço do próximo elemento
+			.eqv SIZE_ID_ELEM, 4		#Tamanho do ID será de 4 bytes
+			.eqv SIZE_STRING_ELEM, 28	#Tamanho da string será de 28 bytes
+			.eqv SIZE_ID_STRING, 32		#Tamanho do ID e da string juntas serão de 32 bytes
 string_criacao_lista:	.asciz "Digite a quantidade de elementos da lista: "
 
 string_leitura1:	.asciz "Digite o elemento número "
@@ -47,10 +49,39 @@ main:
 	ecall				#a0 = entrada inteira
 	add s0, zero, a0		#s0 = a0: salvando o número de elementos da lista
 	
-	#s1: armazenará o endereço do primeiro componente do primeiro elemento da lista 
-	addi s1, zero, -1		#s1 = -1: determinando s1 como ponteiro vazio
-	#s2: armazenará o endereço do último componente do último elemento da lista
-	addi s2, zero, -1		#s2 = -1: determinando s2 como ponteiro vazio
+	#Passa s0 como parametro
+	jal funcao_leitura
+	add s1, zero, a0		#s1: endereço do primeiro componente do primeiro elemento da lista 
+	
+	#Passa s1 como parametro
+	jal funcao_percorre_elementos
+	
+	#Imprimindo texto para usuário: print("Programa executado. Encerrando.")
+	addi a7, zero, SYS_PRINT_STRING #a7 = SYS_PRINT_STRING
+	la a0, string_final 		#a0 = endereco(string_criacao_lista)
+	ecall
+	
+	#Encerrando o programa
+	addi a0, zero, 0		#a0 = 0 (valor para retornar)
+	addi a7, zero, SYS_EXIT		#a7 = SYS_EXIT
+	ecall				#encerrando programa
+	
+#Função Leitura
+#Descrição: faz leitura da lista ligada
+#Parametros:
+	#@s0: número de elemento da lista ligada
+#Saídas:
+	#@a0: ponteiro para o primeiro componente do primeiro elemento da lista ligada
+funcao_leitura:
+	#Por convencao, empilha s0
+	addi sp, sp, -4
+	sw s0, 0(sp)	
+	
+	#a2: armazenará o endereço do primeiro componente do primeiro elemento da lista 
+	addi a2, zero, -1		#a2 = -1: determinando a2 como ponteiro vazio
+	#a3: armazenará o endereço do último componente do último elemento da lista
+	addi a3, zero, -1		#a3 = -1: determinando a3 como ponteiro vazio
+
 	#Lendo os elementos da lista
 	add t0, zero, zero		#t0 = 0: registrador auxiliar para o while
 while_leitura:
@@ -99,8 +130,7 @@ while_leitura:
 	ecall
 	#Lendo a string
 	addi a7, zero, SYS_READ_STRING	#a7 = SYS_READ_STRING
-	#la a0, buffer
-	add a0, zero, t2
+	add a0, zero, t2		#a0 = endereco(string do elemento)
 	addi a1, zero, SIZE_STRING_ELEM	#a1 = SIZE_STRING_ELEM
 	ecall				#elemento[t2] = string[0]
 	
@@ -111,24 +141,40 @@ while_leitura:
 	sw t3, (t2)			#elemento[t2] = t3
 
 	#Concatenando elementos
-	#s1: armazenará o endereço do primeiro componente do primeiro elemento da lista 
-	#s2: armazenará o endereço do último componente do último elemento da lista
+	#a2: armazenará o endereço do primeiro componente do primeiro elemento da lista 
+	#a3: armazenará o endereço do último componente do último elemento da lista
 if_concatenando:			#Se esse é o primeiro elemento da lista
 	addi t6, zero, -1		#t6 = -1 (apenas como auxiliar)
-	bne s1, t6, else_concatenando	#se s1 == -1
-	add s1, zero, t1		#s1 = t1
-	add s2, zero, t2		#s2 = elemento[SIZE_ID+STRING]
+	bne a2, t6, else_concatenando	#se a2 == -1, então é o primeiro elemento da lista
+	add a2, zero, t1		#a2 = t1 (a2 aponta para o inicio do novo elemento)
+	add a3, zero, t2		#a3 = t2 (a3 aponta para o fim do novo element)
 	j fim_if_concatenando
 else_concatenando:			#Se esse não é o primeiro elemento da lista
-	sw t1, (s2)			#elemento[s2] = t1
-	add s2, zero, t2		#s2 = t2
+	sw t1, (a3)			#elemento[a3] = t1 (ponteiro do ultimo elemento aponta para o inicio de um novo)
+	add a3, zero, t2		#a3 = t2 (atualiza quem é o ponteiro para o ultimo componente do ultimo elemento)
 fim_if_concatenando:
 	addi t0, t0, 1			#t0 ++
 	j while_leitura
-	
 fim_leitura:
+	#Desempilha s0
+	lw s0, 0(sp)
+	addi sp, sp, 4
+	#Salva o ponteiro inicial em a0
+	add a0, zero, a2
+	#Retorna o comando da função para a main
+	jr ra
 	
-percorre_elementos:
+#Função Percorre Elementos
+#Descrição: Percorre do início ao fim a lista ligada
+#Parametros:
+	#@s1: ponteiro para o primeiro componente do primeiro elemento da lista ligada
+#Saídas: não possui saídas
+funcao_percorre_elementos:
+	#Empilha s0 e s1
+	addi sp, sp, -8
+	sw s0, 0(sp)
+	sw s1, 4(sp)
+
 	#Percorrendo lista ligada
 	add t0, zero, s1		#t0 = s1: copia do ponteiro do início da lista
 	addi t6, zero, -1		#t6 = -1: registrador auxiliar
@@ -147,11 +193,10 @@ while_percorre:
 	la a0, string_percorre_id	#a0 = endereco(string_percorre_id)
 	ecall
 	#Leitura do ID
-	lw t2, (t0)			#t2 = elemento[0]
+	lw a0, (t0)			#t2 = elemento[0]
 	addi t0, t0, SIZE_ID_ELEM	#t0 += SIZE_ID
 	#print(ID)
 	addi a7, zero, SYS_PRINT_INT 	#a7 = SYS_PRINT_STRING
-	add a0, zero, t2		#a0 = t2 (ID)
 	ecall
 	#print(string_percorre_str)
 	addi a7, zero, SYS_PRINT_STRING #a7 = SYS_PRINT_STRING
@@ -167,12 +212,9 @@ while_percorre:
 	lw t0, (t0)			#t0 = elemento[SIZE_ID_STRING]
 	j while_percorre
 fim_while_percorre:
-	#Imprimindo texto para usuário: print("Programa executado. Encerrando.")
-	addi a7, zero, SYS_PRINT_STRING #a7 = SYS_PRINT_STRING
-	la a0, string_final 		#a0 = endereco(string_criacao_lista)
-	ecall
-	
-	#Encerrando o programa
-	addi a0, zero, 0		#a0 = 0 (valor para retornar)
-	addi a7, zero, SYS_EXIT		#a7 = SYS_EXIT
-	ecall				#encerrando programa
+	#Desempilha s0, s1 e s2
+	lw s0, 0(sp)
+	lw s1, 4(sp)
+	addi sp, sp, 8
+	#Passa o controle da função para a main
+	jr ra
