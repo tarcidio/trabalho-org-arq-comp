@@ -35,6 +35,8 @@ string_percorre_str:	.asciz " | String: "
 
 string_final:		.asciz "Programa executado. Encerrando."
 
+string_erro:		.asciz "Você inseriu um valor inválido.\n"
+
 	.text
 	.globl main
 
@@ -49,12 +51,26 @@ main:
 	ecall				#a0 = entrada inteira
 	add s0, zero, a0		#s0 = a0: salvando o número de elementos da lista
 	
+	#Verificando se o número é válido
+	blt s0, zero, erro
+	
 	#Passa s0 como parametro
 	jal funcao_leitura
 	add s1, zero, a0		#s1: endereço do primeiro componente do primeiro elemento da lista 
 	
 	#Passa s1 como parametro
 	jal funcao_percorre_elementos
+	
+	#Encerrando programa
+	j encerra
+	
+erro:
+	#Imprimindo texto para usuário: print("Você inseriu um valor inválido.")
+	addi a7, zero, SYS_PRINT_STRING #a7 = SYS_PRINT_STRING
+	la a0, string_erro		#a0 = endereco(string_erro)
+	ecall
+
+encerra:
 	
 	#Imprimindo texto para usuário: print("Programa executado. Encerrando.")
 	addi a7, zero, SYS_PRINT_STRING #a7 = SYS_PRINT_STRING
