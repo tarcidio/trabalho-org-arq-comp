@@ -5,7 +5,7 @@
 * Tarcídio Antônio Júnior - 10748347
 * Jade Bortot de Paiva - 11372883
 * Gabriel Barbosa de Oliveira - 12543415
-* Vamo -
+* Luís Filipe Vasconcelos Peres - 10310641
 
 ## Introdução
 
