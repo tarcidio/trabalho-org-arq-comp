@@ -2,10 +2,10 @@
 #UNIVERSIDADE DE SÃO PAULO - SÃO CARLOS
 #INSTITUO DE CIÊNCIAS MATEMÁTICAS E DE COMPUTAÇÃO (ICMC)
 #MEMBROS:
-#JADE
-#GABRIEL
-#VAMO
-#TARCÍDIO ANTÔNIO JÚNIOR - 10748347
+#Tarcídio Antônio Júnior - 10748347
+#Jade Bortot de Paiva - 11372883
+#Gabriel Barbosa de Oliveira - 12543415
+#Luís Filipe Vasconcelos Peres - 10310641
 
 #Resumo do Programa: implementação, em Assembly RISC-V, de uma lista ligada. Ela armazenará
 #duas informações: um ID (inteiro - 4 bytes) e uma string de tamanho fixo de 28 caracteres (28 bytes).
