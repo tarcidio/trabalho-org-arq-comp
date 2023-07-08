@@ -1,4 +1,4 @@
-# Trabalho SCC0902 Organização e Arquitetura de Computadores:
+# Trabalho 01 SCC0902 Organização e Arquitetura de Computadores:
 
 ## Autores:
 
